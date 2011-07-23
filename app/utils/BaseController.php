@@ -2,17 +2,25 @@
 
 // Contains base controller functions
 abstract class BaseController {
+  protected $conn;
+
   function getParam($name) {
     return $_REQUEST[$name];
   }
 
   function execute($action_name) {
+    $this->conn = get_pdo_connection();
     $func_name = "get" . ucfirst($action_name);
     if (method_exists($this, $func_name)) {
       call_user_func(array($this, $func_name));
     } else {
       error_404();
     }
+    $this->conn = null;
+  }
+
+  function getUser() {
+    return array("id" => 1, "username" => "John");
   }
 
   function renderView($view_name, array $data = array()) {
