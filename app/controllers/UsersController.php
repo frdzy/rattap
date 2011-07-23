@@ -29,6 +29,7 @@ class UsersController extends BaseController {
   public function getUpdate() {
     $id = $_SESSION['my_id'];
     $phone = $this->getParam('phone');
+    $phone = str_replace("-", "", $phone);
 
     UserHelper::updateUser($this->conn, $id, $phone);
 

@@ -12,6 +12,7 @@
         </form>
         <script type="text/javascript">
           $(document).ready(function() {
+            getNearbyGroups();
             window.setTimeout("getNearbyGroups()", 2000);
           })
         </script>
