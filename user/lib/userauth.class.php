@@ -365,11 +365,6 @@ class UserAuth
      **/
   	
 	public function getProperty($property) {
-		// You cannot get certain sensitive fields
-		$ignore = array('pass','vercode');
-		if(in_array($property, $ignore)) {
-			return false;
-		}
 		
 		if(!empty($this->userData)){
 			return $this->userData[$this->table[$property]];
