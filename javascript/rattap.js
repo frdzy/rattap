@@ -34,6 +34,7 @@ function showNearbyGroups(data, textStatus, jqXHR) {
     html += "<li><a href=\"/groups/join?group_id=" + obj[group].groupid + "\">" + obj[group].groupname + "</a></li>\n";
   }
   document.getElementById("nearbyGroupList").innerHTML = html;
+  window.setTimeout("getNearbyGroups()", 1200);
 }
 
 function hideDialog() {
