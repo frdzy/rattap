@@ -15,7 +15,8 @@ class GroupHelper {
 
   public static function getNearbyGroups($conn, $long, $lat) {
     $variance = 0.001;
-    $sql = "SELECT * FROM groups WHERE longitude BETWEEN ? AND ? AND latitude BETWEEN ? AND ?";
+    $sql = "SELECT * FROM groups WHERE longitude BETWEEN ? AND ? AND latitude BETWEEN ? AND ?  WHERE creationtime > now() - INTERVAL 2 MINUTE;";
+//select * from groups WHERE creationtime > now() - INTERVAL 5 MINUTE;
     $sth = $conn->prepare($sql);
     $sth->execute(array($long - $variance, $long + $variance, $lat - $variance, $lat + $variance));
     return $sth->fetchAll();

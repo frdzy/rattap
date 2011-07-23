@@ -3,6 +3,8 @@ groupid int  not null auto_increment,
 groupcreatorid int  not null,
 groupname varchar(100) not null,
 creationtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+longtitude double,
+latitude double,
 primary key (groupid)
 );
 
@@ -11,6 +13,7 @@ associd int not null auto_increment,
 groupid int,
 userid int,
 assoctime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+approved int,
 primary key (associd)
 );
 
