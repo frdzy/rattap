@@ -4,12 +4,18 @@
 abstract class BaseController {
   protected $conn;
 
+  private $user = null;
+
+  function preExecute() {
+  }
+
   function getParam($name) {
     return $_REQUEST[$name];
   }
 
   function execute($action_name) {
     $this->conn = get_pdo_connection();
+    $this->preExecute();
     $func_name = "get" . ucfirst($action_name);
     if (method_exists($this, $func_name)) {
       call_user_func(array($this, $func_name));
@@ -20,7 +26,16 @@ abstract class BaseController {
   }
 
   function getUser() {
-    return array("id" => 1, "username" => "John");
+    if (!$this->user) {
+      if (!isset($_SESSION['my_id'])) {
+        return null;
+      }
+      $id = $_SESSION['my_id'];
+
+      // Load user
+      $this->user = UserHelper::getUser($this->conn, $id);
+    }
+    return $this->user;
   }
 
   function renderView($view_name, array $data = array()) {

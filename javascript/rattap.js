@@ -1,6 +1,7 @@
 // geolocation
+var coords = {latitude: 0.0, longitude: 0.0};
 function showMap(position) {
-  var coords = position.coords;
+  coords = position.coords;
   document.getElementById("latitude").value = coords.latitude;
   document.getElementById("longitude").value = coords.longitude;
 }
@@ -24,6 +25,22 @@ $(document).ready(function()
   $(".defaultText").blur();        
 });
 
+function showNearbyGroups(data, textStatus, jqXHR) {
+  var html = ""
+  var obj = eval(data);
+  // TODO save groups?
+  for (group in obj) {
+    // TODO join link
+    html += "<li><a href=\"/groups/join?group_id=" + obj[group].groupid + "\">" + obj[group].groupname + "</a></li>\n";
+  }
+  document.getElementById("nearbyGroupList").innerHTML = html;
+  window.setTimeout("getNearbyGroups()", 1200);
+}
+    
 function getNearbyGroups() {
-  // need to make a jquery AJAX call here
+  $.ajax({
+    type: 'POST',
+    url: '/groups/nearby',
+    data: {latitude: coords.latitude, longitude: coords.longitude},
+    success: showNearbyGroups});
 }

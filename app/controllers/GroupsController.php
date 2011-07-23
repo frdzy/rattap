@@ -1,6 +1,14 @@
 <?php
 
 class GroupsController extends BaseController {
+
+  public function preExecute() {
+    if ($this->getUser() == null) {
+      echo "Please login first";
+      exit;
+    }
+  }
+
   public function getIndex() {
     $data = array();
     return $this->renderView("groups/index", $data);
@@ -12,6 +20,9 @@ class GroupsController extends BaseController {
     $groups = GroupHelper::getNearbyGroups($this->conn, $long, $lat);
 
     echo json_encode($groups);
+    return;
+    $data = array("groups" => $groups);
+    $this->renderView("groups/nearby", $data);
   }
 
   public function getCreate() {
@@ -19,19 +30,33 @@ class GroupsController extends BaseController {
     $long = $this->getParam('long');
     $lat = $this->getParam('lat');
 
-    GroupHelper::createGroup($this->conn, $user, $long, $lat);
-    echo json_encode(array("success" => 1));
+    $id = GroupHelper::createGroup($this->conn, $user, $long, $lat);
+    echo json_encode(array("group_id" => $id));
   }
 
   public function getJoin() {
     $user = $this->getUser();
     $group_id = $this->getParam('group_id');
-    $this->joinGroup($conn, $group_id, $user);
-    return json_encode(array("success" => 1));
+    if (empty($group_id)) {
+      echo "bad stuff";
+      exit;
+    }
+    GroupHelper::joinGroup($this->conn, $group_id, $user);
+    execute_controller("groups","show");
   }
 
   public function getShow() {
-    $data = array();
-    echo $this->renderView("groups/show", $data);
+    $group_id = $this->getParam('group_id');
+    if (empty($group_id)) {
+      echo "bad stuff";
+      exit;
+    }
+    $group = GroupHelper::getGroup($this->conn, $group_id);
+    $members = GroupHelper::getMembers($this->conn, $group_id);
+    $data = array(
+      "group" => $group,
+      "members" => $members,
+    );
+    $this->renderView("groups/show", $data);
   }
 }

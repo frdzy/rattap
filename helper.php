@@ -28,17 +28,17 @@ function approve_user($userid, $con = null){
 }
 
 function create_user($username, $pass, $con){
+  	$con=get_db();
 	$sql = "insert into userauth(username, password, active,userlevel) values('$username', '$pass', 1, 3)";
-        echo $sql;
 
-        $res = asserted_query($sql, "user not created", $con);
+        return asserted_query($sql, "user not created", $con);
 }
 
 function create_group($userid, $username, $long, $lat, $con){
 	$sql = "insert into groups(groupcreatorid, groupname, longtitude, latitude) values($userid, '".mysql_real_escape_string($username."'s")."', ".$long.", ".$lat.")";
         echo $sql;
 
-        $res = asserted_query($sql, "group not created", $con);
+        return asserted_query($sql, "group not created", $con);
 }
 
 function add_assoc($userid, $groupid, $con){
@@ -46,7 +46,7 @@ function add_assoc($userid, $groupid, $con){
         $sql = "insert into group_user_assoc(userid, groupid) values(".$userid.", ".$groupid.")";
         echo $sql;
 
-        $res = asserted_query($sql, "group_assoc not created", $con);
+        return asserted_query($sql, "group_assoc not created", $con);
 }
 
 function get_db(){
