@@ -22,4 +22,11 @@ class GroupHelper {
     $sth->execute(array($long - $variance, $long + $variance, $lat - $variance, $lat + $variance));
     return $sth->fetchAll();
   }
+
+  public static function getGroup($conn, $group_id) {
+    $sql = "SELECT * FROM groups WHERE groupid = ?";
+    $sth = $conn->prepare($sql);
+    $sth->execute(array($group_id));
+    return $sth->fetch();
+  }
 }

@@ -34,12 +34,24 @@ class GroupsController extends BaseController {
   public function getJoin() {
     $user = $this->getUser();
     $group_id = $this->getParam('group_id');
-    GroupHelper::joinGroup($conn, $group_id, $user);
+    if (empty($group_id)) {
+      echo "bad stuff";
+      exit;
+    }
+    GroupHelper::joinGroup($this->conn, $group_id, $user);
     return json_encode(array("success" => 1));
   }
 
   public function getShow() {
-    $data = array();
-    echo $this->renderView("groups/show", $data);
+    $group_id = $this->getParam('group_id');
+    if (empty($group_id)) {
+      echo "bad stuff";
+      exit;
+    }
+    $group = GroupHelper::getGroup($this->conn, $group_id);
+    $data = array(
+      "group" => $group,
+    );
+    $this->renderView("groups/show", $data);
   }
 }
