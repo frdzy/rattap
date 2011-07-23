@@ -17,8 +17,7 @@ class UsersController extends BaseController {
     }
 
     $_SESSION['my_id'] = UserHelper::createUser($this->conn, $name, $phone);
-
-    // Returns true/false depending on success result
-    echo json_encode(array("id" => $_SESSION['my_id']));
+    
+    execute_controller("groups", "index");
   }
 }
