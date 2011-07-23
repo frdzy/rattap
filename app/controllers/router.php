@@ -1,18 +1,35 @@
 <?php
 
-$request = $_SERVER['PATH_INFO'];
-echo $request;
-list($blank, $page, $func) = explode("/", $request);
+// Get controller and action
+$request = trim($_SERVER['PATH_INFO'], '/');
+$params = explode('/', $request);
 
-switch ($page) {
+if (count($params) == 0 || $params[0] == "") {
+  $params[0] = "public";
+}
+if (count($params) == 1) {
+  $params[1] = "index";
+}
+
+$controller_name = $params[0];
+$action_name = $params[1];
+
+switch ($controller_name) {
+  case 'groups':
+    load_file('controllers/GroupsController.php');
+    $controller = new GroupsController();
+    break;
   case 'users':
-    require_once('app/controllers/users_controller.php');
-    users_call($func);
+    load_file('controllers/UsersController.php');
+    $controller = new UsersController();
     break;
   case 'public':
-    require_once('app/controllers/public_controller.php');
-    public_call($func);
+    load_file('controllers/PublicController.php');
+    $controller = new PublicController();
     break;
   default:
-    error_log("[CTRL] router.php: ". $page);
+    error_404();
 }
+
+$controller->execute($action_name);
+
