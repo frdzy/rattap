@@ -1,6 +1,7 @@
 // geolocation
+var coords = {latitude: 0.0, longitude: 0.0};
 function showMap(position) {
-  var coords = position.coords;
+  coords = position.coords;
   document.getElementById("latitude").value = coords.latitude;
   document.getElementById("longitude").value = coords.longitude;
 }
@@ -24,6 +25,19 @@ $(document).ready(function()
   $(".defaultText").blur();        
 });
 
+function showNearbyGroups(data, textStatus, jqXHR) {
+  var html = ""
+  // TODO save groups?
+  for (group in data) {
+    html += "<li>" + group[name] + "(" + group[members] + ")</li>\n";
+  }
+  Document.getElementById("nearbyGroupList").innerHTML = html;
+}
+    
 function getNearbyGroups() {
-  // need to make a jquery AJAX call here
+  $.ajax({
+    type: 'POST',
+    url: '/groups/nearby',
+    data: {latitude: coords.latitude, longitude: coordes.longitude},
+    success: showNearbyGroups});
 }
