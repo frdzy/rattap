@@ -10,6 +10,6 @@
             window.setTimeout("getGroupMembers(<?php echo $group['groupid']; ?>)", 500);
           })
         </script>
-      <a href="/groups/index">Back to Groups</a>
+      <a rel="external" href="/groups/index">Back to Groups</a>
       </div>
     </div>

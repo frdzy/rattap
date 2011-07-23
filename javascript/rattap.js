@@ -57,7 +57,7 @@ function showGroupMembers(data, textStatus, jqXHR) {
   var obj = eval(data);
   document.getElementById("groupMemberList").innerHTML = "";
   for (member in obj) {
-    $("#groupMemberList").append("<li>" + obj[member].username + "</li><li>" + obj[member].password + "</li>");
+    $("#groupMemberList").append("<li>" + obj[member].username + "<span style='float: right'>" + obj[member].password + "</span></li>");
     $("#groupMemberList").listview("refresh");
   }
   window.setTimeout("getGroupMembers(" + recall_id + ")", 1200);
