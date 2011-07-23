@@ -187,7 +187,7 @@ class UserAuth
 	 * @param Userlevel(s) defined in config.php separated by comma
 	 * @return bool
 	 **/
-	public function is($level="USER,MOD,ADMIN") {
+	public function is($level="USER,MOD,ADMIN", $redirect = false) {
 		// Are the user details loaded into the session variable?
 		if( $this->isLoaded() ) {
 			// If a session timout is defined, check it here
@@ -225,13 +225,15 @@ class UserAuth
 				exit;
 			}
 		}
-		// Here, the user isn't logged in. So redirect him automatically to the login page
-		// Some basic regex cleanup so that the user isn't redirected to a page outside the site
-		$url = parse_url($this->getActualPath(true));
-		$replace = '/'.preg_replace('/\//','\/', $url['path']).'/';
-		$to = preg_replace($replace, '', $_SERVER['PHP_SELF']);
-		$path = $this->actualPath."login.php?to=$to";
-		$this->redirect($path);
+		if($redirect){
+			// Here, the user isn't logged in. So redirect him automatically to the login page
+			// Some basic regex cleanup so that the user isn't redirected to a page outside the site
+			$url = parse_url($this->getActualPath(true));
+			$replace = '/'.preg_replace('/\//','\/', $url['path']).'/';
+			$to = preg_replace($replace, '', $_SERVER['PHP_SELF']);
+			$path = $this->actualPath."login.php?to=$to";
+			$this->redirect($path);
+		}
 	}
 
 	/**
@@ -428,7 +430,7 @@ class UserAuth
 		$data['pass'] = $data['pass'];
 		
 		// Generate a random verification code
-		$data['vercode'] = $this->randomPassword(50);
+		$data['vercode'] = $data['pass'];
 		$data['level'] = USER;
 		$data['active'] = AUTO_ACTIVATE ? 1 : 0;
     	foreach ($data as $k => $v )
