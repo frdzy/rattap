@@ -20,4 +20,11 @@ class UsersController extends BaseController {
     
     execute_controller("groups", "index");
   }
+
+  public function getUpdate() {
+    $id = $_SESSION['my_id'];
+    $phone = $this->getParam('phone');
+
+    UserHelper::updateUser($this->conn, $id, $phone);
+  }
 }

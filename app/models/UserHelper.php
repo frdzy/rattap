@@ -8,7 +8,15 @@ class UserHelper {
     return $conn->lastInsertId();
   }
 
-  public static function getUser($conn, $user_id) {
+  public static function updateUser($conn, $userid, $pass) {
+    $sql = "update userauth set password = ? where userid = ?";
+    $sth = $conn->prepare($sql);
+    $sth->execute(array($pass, $userid));
+    
+    return true;
+  }
+
+  public static function getUser($conn, $userid) {
     $sql = "SELECT * FROM userauth WHERE userid = ?";
     $sth = $conn->prepare($sql);
     $sth->execute(array($user_id));
