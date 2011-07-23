@@ -22,7 +22,8 @@ class UsersController extends BaseController {
   }
 
   public function getEdit() {
-    $this->renderView("users/edit");
+    $data = array("group_id" => $this->getParam('group_id'));
+    $this->renderView("users/edit", $data);
   }
 
   public function getUpdate() {
@@ -30,5 +31,7 @@ class UsersController extends BaseController {
     $phone = $this->getParam('phone');
 
     UserHelper::updateUser($this->conn, $id, $phone);
+
+    execute_controller("groups", "show");
   }
 }
