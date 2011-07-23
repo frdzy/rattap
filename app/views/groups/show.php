@@ -9,8 +9,7 @@
 <?php $phone = $member['password'];
 $phone = (strpos($phone, "BLANK") !== false) ? "No number yet" : $phone;
 ?>
-          <li><?php echo $member['username'] ?></li>
-          <li><?php echo $phone ?></li>
+          <li><?php echo $member['username'] ?> <div style="float:right;"><?php echo $phone ?></div></li>
           <?php } ?>
         </ul>
       </div>
