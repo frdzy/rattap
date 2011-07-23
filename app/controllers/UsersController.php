@@ -9,20 +9,16 @@ class UsersController extends BaseController {
 
   public function getCreate() {
     $name = $this->getParam('name');
-    $phone = $this->getParam('phone');
-    $latitude = $this->getParam('latitude');
-    $longitude = $this->getParam('longitude');
+    $phone = "BLANK_" . rand(0, 100000);
 
-    $_SESSION['my_id'] = create_user($name, $phone);
-    $_SESSION['my_name'] = $name;
-    $_SESSION['my_phone'] = $phone;
-    $_SESSION['my_latitude'] = $latitude;
-    $_SESSION['my_longitude'] = $longitude;
+    if (empty($name)) {
+      echo "Enter a name";
+      exit;
+    }
 
-    error_log('[USRSCTRL] creating user with name '.$name.
-      ' and number '.$phone);
+    $_SESSION['my_id'] = UserHelper::createUser($this->conn, $name, $phone);
 
     // Returns true/false depending on success result
-    echo json_encode($_SESSION['uid'] > 0);
+    echo json_encode(array("id" => $_SESSION['my_id']));
   }
 }

@@ -1,16 +1,9 @@
 <?
 require_once('user/lib/config.php');
 
-echo DB_HOST;
-echo DB_USER;
-echo "<br>";
-echo DB_PASS;
-echo DB_NAME;
-
 function create_user($username, $pass){
   $con=get_db();
 	$sql = "insert into userauth(username, password, active,userlevel) values('$username', '$pass', 1, 3)";
-        echo $sql;
 
         return asserted_query($sql, "user not created", $con);
 }

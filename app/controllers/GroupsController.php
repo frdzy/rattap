@@ -27,8 +27,8 @@ class GroupsController extends BaseController {
     $long = $this->getParam('long');
     $lat = $this->getParam('lat');
 
-    GroupHelper::createGroup($this->conn, $user, $long, $lat);
-    echo json_encode(array("success" => 1));
+    $id = GroupHelper::createGroup($this->conn, $user, $long, $lat);
+    echo json_encode(array("group_id" => $id));
   }
 
   public function getJoin() {
