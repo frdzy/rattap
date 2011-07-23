@@ -6,7 +6,7 @@
         <script type="text/javascript">
           $(document).ready(function() {
             getNearbyGroups();
-          }
+          })
         </script>
       </div>
     </div>
