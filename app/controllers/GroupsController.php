@@ -42,7 +42,7 @@ class GroupsController extends BaseController {
       exit;
     }
     GroupHelper::joinGroup($this->conn, $group_id, $user);
-    return json_encode(array("success" => 1));
+    execute_controller("groups","show");
   }
 
   public function getShow() {
