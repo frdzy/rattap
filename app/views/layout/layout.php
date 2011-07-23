@@ -8,6 +8,7 @@
     <!-- our own brew -->
     <link rel="stylesheet" href="/stylesheets/rattap.css" />
     <script type="text/javascript" src="/javascript/rattap.js"></script>
+    <meta name="viewport" content="width=320" />
   </head>
   <body>
         <?php echo $content ?>
