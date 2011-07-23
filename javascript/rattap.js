@@ -30,15 +30,15 @@ function showNearbyGroups(data, textStatus, jqXHR) {
   // TODO save groups?
   for (group in data) {
     // TODO join link
-    html += "<li>" + group[name] + "(" + group[members] + ")</li>\n";
+    html += "<li>" + group['groupname'] + "</li>\n";
   }
-  Document.getElementById("nearbyGroupList").innerHTML = html;
+  document.getElementById("nearbyGroupList").innerHTML = html;
 }
     
 function getNearbyGroups() {
   $.ajax({
     type: 'POST',
     url: '/groups/nearby',
-    data: {latitude: coords.latitude, longitude: coordes.longitude},
+    data: {latitude: coords.latitude, longitude: coords.longitude},
     success: showNearbyGroups});
 }

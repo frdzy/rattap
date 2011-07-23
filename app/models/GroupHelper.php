@@ -16,7 +16,7 @@ class GroupHelper {
   }
 
   public static function getNearbyGroups($conn, $long, $lat) {
-    $variance = 0.01;
+    $variance = 180;
     $sql = "SELECT * FROM groups WHERE longtitude BETWEEN ? AND ? AND latitude BETWEEN ? AND ?";
     $sth = $conn->prepare($sql);
     $sth->execute(array($long - $variance, $long + $variance, $lat - $variance, $lat + $variance));
