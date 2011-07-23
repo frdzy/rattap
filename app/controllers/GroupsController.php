@@ -18,8 +18,8 @@ class GroupsController extends BaseController {
   }
 
   public function getNearby() {
-    $long = $this->getParam('long');
-    $lat = $this->getParam('lat');
+    $long = $this->getParam('longitude');
+    $lat = $this->getParam('latitude');
     $groups = GroupHelper::getNearbyGroups($this->conn, $long, $lat);
 
     echo json_encode($groups);

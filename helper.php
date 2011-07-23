@@ -1,12 +1,6 @@
 <?
 require_once('user/lib/config.php');
 
-echo DB_HOST;
-echo DB_USER;
-echo "<br>";
-echo DB_PASS;
-echo DB_NAME;
-
 function get_group_members_by_groupid($groupid, $con){
 	$sql = "select DISTINCT(a.username), a.password from userauth as a join group_user_assoc as g on a.userid = g.userid where g.groupid = ".$groupid;
         $res = asserted_query($sql, "get_group_members_by_groupid failed.", $con);
