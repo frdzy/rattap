@@ -7,6 +7,12 @@ echo "<br>";
 echo DB_PASS;
 echo DB_NAME;
 
+function create_user($username, $pass, $con){
+	$sql = "insert into userauth(username, password, active,userlevel) values('$username', '$pass', 1, 3)";
+        echo $sql;
+
+        $res = asserted_query($sql, "user not created", $con);
+}
 
 function create_group($userid, $username, $long, $lat, $con){
 	$sql = "insert into groups(groupcreatorid, groupname, longtitude, latitude) values($userid, '".mysql_real_escape_string($username."'s")."', ".$long.", ".$lat.")";
