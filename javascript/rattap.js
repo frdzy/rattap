@@ -27,12 +27,18 @@ $(document).ready(function()
 
 function showNearbyGroups(data, textStatus, jqXHR) {
   var html = ""
+  var obj = eval(data);
   // TODO save groups?
-  for (group in data) {
+  for (group in obj) {
     // TODO join link
-    html += "<li>" + group['groupname'] + "</li>\n";
+    html += "<li><a href=\"/groups/join?group_id=" + obj[group].groupid + "\">" + obj[group].groupname + "</a></li>\n";
   }
   document.getElementById("nearbyGroupList").innerHTML = html;
+  window.setTimeout("getNearbyGroups()", 1200);
+}
+
+function hideDialog() {
+  $('.ui-dialog').dialog('close');
 }
     
 function getNearbyGroups() {

@@ -3,6 +3,7 @@
         <h1><?php echo $group['groupname'] ?></h1>
       </div>
       <div data-role="content">  
+        <a href="/users/edit" data-rel="dialog">Edit Phone Number</a>
         <ul data-role="listview" data-inset="true" data-theme"c" data-divider-theme="b">
           <?php foreach ($members as $member) { ?>
 <?php $phone = $member['password'];
