@@ -59,4 +59,14 @@ class GroupsController extends BaseController {
     );
     $this->renderView("groups/show", $data);
   }
+
+  public function getGetmembers() {
+    $group_id = $this->getParam('group_id');
+    if (empty($group_id)) {
+      echo "naughty stuff";
+      exit;
+    }
+    $members = GroupHelper::getMembers($this->conn, $group_id);
+    echo json_encode($members);
+  }
 }

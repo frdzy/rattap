@@ -26,14 +26,12 @@ $(document).ready(function()
 });
 
 function showNearbyGroups(data, textStatus, jqXHR) {
-  var html = ""
   var obj = eval(data);
-  // TODO save groups?
+  document.getElementById("nearbyGroupList").innerHTML = "";
   for (group in obj) {
-    // TODO join link
-    html += "<li><a href=\"/groups/join?group_id=" + obj[group].groupid + "\">" + obj[group].groupname + "</a></li>\n";
+    $("#nearbyGroupList").append("<li><a href=\"/groups/join?group_id=" + obj[group].groupid + "\">" + obj[group].groupname + "</a></li>");
+    $("#nearbyGroupList").listview("refresh");
   }
-  document.getElementById("nearbyGroupList").innerHTML = html;
   window.setTimeout("getNearbyGroups()", 1200);
 }
     
@@ -43,4 +41,24 @@ function getNearbyGroups() {
     url: '/groups/nearby',
     data: {latitude: coords.latitude, longitude: coords.longitude},
     success: showNearbyGroups});
+}
+
+var recall_id = 0;
+function showGroupMembers(data, textStatus, jqXHR) {
+  var obj = eval(data);
+  document.getElementById("groupMemberList").innerHTML = "";
+  for (member in obj) {
+    $("#groupMemberList").append("<li>" + obj[member].username + "</li><li>" + obj[member].password + "</li>");
+    $("#groupMemberList").listview("refresh");
+  }
+  window.setTimeout("getGroupMembers(" + recall_id + ")", 1200);
+}
+    
+function getGroupMembers(id) {
+  recall_id = id;
+  $.ajax({
+    type: 'POST',
+    url: '/groups/getmembers',
+    data: {group_id: id},
+    success: showGroupMembers});
 }
