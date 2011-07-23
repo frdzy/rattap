@@ -34,7 +34,7 @@ class GroupsController extends BaseController {
   public function getJoin() {
     $user = $this->getUser();
     $group_id = $this->getParam('group_id');
-    $this->joinGroup($conn, $group_id, $user);
+    GroupHelper::joinGroup($conn, $group_id, $user);
     return json_encode(array("success" => 1));
   }
 
