@@ -1,3 +1,11 @@
+// geolocation
+function showMap(position) {
+  var coords = position.coords;
+  document.getElementById("latitude").value = coords.latitude;
+  document.getElementById("longitude").value = coords.longitude;
+}
+navigator.geolocation.getCurrentPosition(showMap);
+
 // hint text for input text
 $(document).ready(function()
 {
