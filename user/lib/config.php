@@ -17,8 +17,8 @@ define("ADMIN_EMAIL", "seckincansahin@gmail.com"); // Email of the administrator
 /* If you scripts are in the http://example.com/application/user folder, type user as the USER_DIR */
 define("USER_DIR", "user");
 /* If you want the user to go http://www.example.com/application/login_redirect.php */
-define("LOGIN_REDIRECT", "user/account.php");
-define("LOGOUT_REDIRECT", "index.php"); // Redirect the user to this page after logout
+define("LOGIN_REDIRECT", "");
+define("LOGOUT_REDIRECT", ""); // Redirect the user to this page after logout
 
 ///////////////////////////////////////////////////////////////////////////////
 
