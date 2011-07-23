@@ -29,6 +29,7 @@ function showNearbyGroups(data, textStatus, jqXHR) {
   var html = ""
   // TODO save groups?
   for (group in data) {
+    // TODO join link
     html += "<li>" + group[name] + "(" + group[members] + ")</li>\n";
   }
   Document.getElementById("nearbyGroupList").innerHTML = html;
