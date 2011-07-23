@@ -21,4 +21,11 @@ class UsersController extends BaseController {
     // Returns true/false depending on success result
     echo json_encode(array("id" => $_SESSION['my_id']));
   }
+
+  public function getUpdate() {
+    $id = $_SESSION['my_id'];
+    $phone = $this->getParam('phone');
+
+    UserHelper::updateUser($this->conn, $id, $phone);
+  }
 }
