@@ -12,5 +12,6 @@ $phone = (strpos($phone, "BLANK") !== false) ? "No number yet" : $phone;
           <li><?php echo $member['username'] ?> <div style="float:right;"><?php echo $phone ?></div></li>
           <?php } ?>
         </ul>
+      <a href="/groups/index">Back to Groups</a>
       </div>
     </div>
