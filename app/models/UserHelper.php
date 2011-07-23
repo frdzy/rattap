@@ -16,7 +16,7 @@ class UserHelper {
     return true;
   }
 
-  public static function getUser($conn, $userid) {
+  public static function getUser($conn, $user_id) {
     $sql = "SELECT * FROM userauth WHERE userid = ?";
     $sth = $conn->prepare($sql);
     $sth->execute(array($user_id));

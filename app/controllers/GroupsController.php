@@ -20,6 +20,9 @@ class GroupsController extends BaseController {
     $groups = GroupHelper::getNearbyGroups($this->conn, $long, $lat);
 
     echo json_encode($groups);
+    return;
+    $data = array("groups" => $groups);
+    $this->renderView("groups/nearby", $data);
   }
 
   public function getCreate() {
