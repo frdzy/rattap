@@ -10,13 +10,6 @@
     <script type="text/javascript" src="/javascript/rattap.js"></script>
   </head>
   <body>
-    <div data-role="page">
-      <div data-role="header">
-        <h1>><?php echo $title ?></h1>
-      </div>
-      <div data-role="content">  
         <?php echo $content ?>
-      </div>
-    </div>
   </body>
 </html>
