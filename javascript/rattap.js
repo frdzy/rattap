@@ -24,3 +24,6 @@ $(document).ready(function()
   $(".defaultText").blur();        
 });
 
+function getNearbyGroups() {
+  // need to make a jquery AJAX call here
+}
