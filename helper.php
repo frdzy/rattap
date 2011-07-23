@@ -8,6 +8,21 @@ echo DB_PASS;
 echo DB_NAME;
 
 
+function create_group($userid, $username, $long, $lat, $con){
+	$sql = "insert into groups(groupcreatorid, groupname, longtitude, latitude) values($userid, '".mysql_real_escape_string($username."'s")."', ".$long.", ".$lat.")";
+        echo $sql;
+
+        $res = asserted_query($sql, "group not created", $con);
+}
+
+function add_assoc($userid, $groupid, $con){
+
+        $sql = "insert into group_user_assoc(userid, groupid) values(".$userid.", ".$groupid.")";
+        echo $sql;
+
+        $res = asserted_query($sql, "group_assoc not created", $con);
+}
+
 function get_db(){
 	$db = mysql_connect(DB_HOST, DB_USER, DB_PASS);
 	if ( !$db ) {
@@ -28,8 +43,8 @@ function asserted_query($query, $err, $con){
 	return $res;
 }
 
-$con = get_db();
-$res = asserted_query("select * from userauth", "error happened.", $con);
-echo json_encode(mysql_fetch_array($res));
+//$con = get_db();
+//$res = asserted_query("select * from userauth", "error happened.", $con);
+//echo json_encode(mysql_fetch_array($res));
 
 ?>
