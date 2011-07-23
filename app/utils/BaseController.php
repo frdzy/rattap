@@ -2,6 +2,10 @@
 
 // Contains base controller functions
 abstract class BaseController {
+  function getParam($name) {
+    return $_REQUEST[$name];
+  }
+
   function execute($action_name) {
     $func_name = "get" . ucfirst($action_name);
     if (method_exists($this, $func_name)) {
