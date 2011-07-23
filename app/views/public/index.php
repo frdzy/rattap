@@ -7,7 +7,7 @@
           <input type="text" name="name" class="defaultText" title="Your Name..." />
           <input type="hidden" name="latitude" id="latitude" />
           <input type="hidden" name="longitude" id="longitude" />
-          <input type="submit" value="ratTap!" />
+          <input type="submit" value="ratTap!" id="rattapbutton" />
         </form>
       </div>
     </div>
