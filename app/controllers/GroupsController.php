@@ -4,7 +4,7 @@ class GroupsController extends BaseController {
 
   public function preExecute() {
     if ($this->getUser() == null) {
-      echo "Please login first";
+      header( 'Location: /' ) ;
       exit;
     }
   }
