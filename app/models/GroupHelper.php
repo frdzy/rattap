@@ -2,9 +2,10 @@
 
 class GroupHelper {
   public static function createGroup($conn, $user, $long, $lat) {
+    $group_name = $user['username'] . "'s Group";
     $sql = "INSERT INTO groups(groupcreatorid, groupname, longtitude, latitude) values(?, ?, ?, ?)";
     $sth = $conn->prepare($sql);
-    $sth->execute(array($user['id'], $user['name'] . "'s Group", $long, $lat));
+    $sth->execute(array($user['id'], $group_name, $long, $lat));
   }
 
   public static function joinGroup($conn, $group_id, $user) {

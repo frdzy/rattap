@@ -1,6 +1,14 @@
 <?php
 
 class GroupsController extends BaseController {
+
+  public function preExecute() {
+    if ($this->getUser() == null) {
+      echo "Please login first";
+      exit;
+    }
+  }
+
   public function getIndex() {
     $data = array();
     return $this->renderView("groups/index", $data);
