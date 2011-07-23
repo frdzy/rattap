@@ -24,7 +24,7 @@ define("LOGOUT_REDIRECT", ""); // Redirect the user to this page after logout
 
 /* Database Settings */
 define("DB_HOST","localhost"); // Hostname
-define("DB_NAME","seckin_rattap"); // Database
+define("DB_NAME","ktam_rattap"); // Database
 define("DB_USER","root"); // Username
 define("DB_PASS","DvyN4cB2j4Z00RH3MoJTQo07PM9ksrY87Mo"); // Password
 define("TBL_USERS", "userauth"); // Table name

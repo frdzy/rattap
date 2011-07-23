@@ -9,11 +9,9 @@ class UserHelper {
   }
 
   public static function updateUser($conn, $userid, $pass) {
-    $sql = "update userauth set password = ? where userid = ?";
+    $sql = "UPDATE userauth SET password = ? WHERE userid = ?";
     $sth = $conn->prepare($sql);
     $sth->execute(array($pass, $userid));
-    
-    return true;
   }
 
   public static function getUser($conn, $user_id) {

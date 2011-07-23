@@ -16,10 +16,12 @@ class GroupHelper {
   }
 
   public static function getNearbyGroups($conn, $long, $lat) {
-    $variance = 180;
-    $sql = "SELECT * FROM groups WHERE longtitude BETWEEN ? AND ? AND latitude BETWEEN ? AND ?";
+    $variance = 180.1;
+    $sql = "SELECT * FROM groups WHERE longtitude BETWEEN ? AND ? AND latitude BETWEEN ? AND ? AND creationtime > now() - INTERVAL 20 MINUTE;";
     $sth = $conn->prepare($sql);
-    $sth->execute(array($long - $variance, $long + $variance, $lat - $variance, $lat + $variance));
+    $data = array($long - $variance, $long + $variance, $lat - $variance, $lat + $variance);
+    $sth->execute($data);
+    //return $data;
     return $sth->fetchAll();
   }
 

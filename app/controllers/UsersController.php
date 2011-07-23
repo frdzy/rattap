@@ -21,10 +21,18 @@ class UsersController extends BaseController {
     execute_controller("groups", "index");
   }
 
+  public function getEdit() {
+    $data = array("group_id" => $this->getParam('group_id'));
+    $this->renderView("users/edit", $data);
+  }
+
   public function getUpdate() {
     $id = $_SESSION['my_id'];
     $phone = $this->getParam('phone');
+    $phone = str_replace("-", "", $phone);
 
     UserHelper::updateUser($this->conn, $id, $phone);
+
+    execute_controller("groups", "show");
   }
 }

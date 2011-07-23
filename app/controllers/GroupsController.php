@@ -10,19 +10,19 @@ class GroupsController extends BaseController {
   }
 
   public function getIndex() {
-    $data = array();
+    $long = $this->getParam('long');
+    $lat = $this->getParam('lat');
+    error_log('AYCARAMBA',$long,$lat);
+    $data = array('long' => $long, 'lat' => $lat);
     return $this->renderView("groups/index", $data);
   }
 
   public function getNearby() {
-    $long = $this->getParam('long');
-    $lat = $this->getParam('lat');
+    $long = $this->getParam('longitude');
+    $lat = $this->getParam('latitude');
     $groups = GroupHelper::getNearbyGroups($this->conn, $long, $lat);
 
     echo json_encode($groups);
-    return;
-    $data = array("groups" => $groups);
-    $this->renderView("groups/nearby", $data);
   }
 
   public function getCreate() {
@@ -31,7 +31,9 @@ class GroupsController extends BaseController {
     $lat = $this->getParam('lat');
 
     $id = GroupHelper::createGroup($this->conn, $user, $long, $lat);
-    echo json_encode(array("group_id" => $id));
+    $_REQUEST['group_id'] = $id;
+
+    execute_controller("groups","join");
   }
 
   public function getJoin() {
