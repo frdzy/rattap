@@ -14,8 +14,8 @@ abstract class BaseController {
   }
 
   function execute($action_name) {
-    $this->preExecute();
     $this->conn = get_pdo_connection();
+    $this->preExecute();
     $func_name = "get" . ucfirst($action_name);
     if (method_exists($this, $func_name)) {
       call_user_func(array($this, $func_name));
