@@ -35,6 +35,10 @@ function showNearbyGroups(data, textStatus, jqXHR) {
   }
   document.getElementById("nearbyGroupList").innerHTML = html;
 }
+
+function hideDialog() {
+  $('.ui-dialog').dialog('close');
+}
     
 function getNearbyGroups() {
   $.ajax({

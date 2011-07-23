@@ -21,6 +21,10 @@ class UsersController extends BaseController {
     execute_controller("groups", "index");
   }
 
+  public function getEdit() {
+    $this->renderView("users/edit");
+  }
+
   public function getUpdate() {
     $id = $_SESSION['my_id'];
     $phone = $this->getParam('phone');
