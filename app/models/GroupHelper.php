@@ -29,4 +29,11 @@ class GroupHelper {
     $sth->execute(array($group_id));
     return $sth->fetch();
   }
+
+  public static function getMembers($conn, $group_id) {
+    $sql = "SELECT * FROM userauth WHERE userid IN (SELECT userid FROM group_user_assoc WHERE groupid = ?)";
+    $sth = $conn->prepare($sql);
+    $sth->execute(array($group_id));
+    return $sth->fetchAll();
+  }
 }

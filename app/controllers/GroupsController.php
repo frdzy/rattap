@@ -49,8 +49,10 @@ class GroupsController extends BaseController {
       exit;
     }
     $group = GroupHelper::getGroup($this->conn, $group_id);
+    $members = GroupHelper::getMembers($this->conn, $group_id);
     $data = array(
       "group" => $group,
+      "members" => $members,
     );
     $this->renderView("groups/show", $data);
   }
