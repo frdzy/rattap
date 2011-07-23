@@ -36,6 +36,15 @@ function showNearbyGroups(data, textStatus, jqXHR) {
   document.getElementById("nearbyGroupList").innerHTML = html;
   window.setTimeout("getNearbyGroups()", 1200);
 }
+
+function addCoord() {
+  $('#lat').val(coords.latitude);
+  $('#long').val(coords.longitude);
+}
+
+function hideDialog() {
+  $('.ui-dialog').dialog('close');
+}
     
 function getNearbyGroups() {
   $.ajax({
