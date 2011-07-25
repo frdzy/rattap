@@ -4,6 +4,9 @@
 
 function error_404() {
   header("Status: 404 Not Found");
+?>
+<span style="font-size: 1.1em; font-weight: bold">Sorry, we could not find the file you were looking for.</span>
+<?php
   exit;
 }
 

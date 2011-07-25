@@ -54,7 +54,6 @@ CREATE TABLE `userauth` (
   `lastActive` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`userid`),
-  UNIQUE KEY `password` (`password`),
   KEY `active` (`active`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -27,6 +27,11 @@ if (isset($_SERVER['PATH_INFO'])) {
 } else {
   $request = "";
 }
+if (empty($request) && isset($_REQUEST['url'])) {
+  $request = trim($_REQUEST['url'], '/');
+} else {
+  $request = "";
+}
 $params = explode('/', $request);
 
 if (count($params) == 0 || $params[0] == "") {
