@@ -22,7 +22,11 @@ function execute_controller($controller_name, $action_name) {
 }
 
 // Get controller and action
-$request = trim($_SERVER['PATH_INFO'], '/');
+if (isset($_SERVER['PATH_INFO'])) {
+  $request = trim($_SERVER['PATH_INFO'], '/');
+} else {
+  $request = "";
+}
 $params = explode('/', $request);
 
 if (count($params) == 0 || $params[0] == "") {

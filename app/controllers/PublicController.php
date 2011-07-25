@@ -3,8 +3,7 @@
 class PublicController extends BaseController {
   public function getIndex() {
     if ($this->getUser() !== null) {
-      header( 'Location: /groups/index' ) ;
-      die;
+      $this->redirect("groups/index");
     }
     $this->renderView("public/index");
   }

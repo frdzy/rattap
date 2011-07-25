@@ -6,16 +6,18 @@ class UsersController extends BaseController {
 
   public function getCreate() {
     $name = $this->getParam('name');
-    $phone = "BLANK_" . rand(0, 100000);
 
     if (empty($name)) {
-      echo "Enter a name";
+      $this->setStatus("Please enter a name");
+      $this->redirect("");
       exit;
     }
 
-    $_SESSION['my_id'] = UserHelper::createUser($this->conn, $name, $phone);
+    $_SESSION['my_id'] = UserHelper::createUser($this->conn, $name, "");
+    $_SESSION['user_lat'] = $this->getParam("latitude", 0);
+    $_SESSION['user_long'] = $this->getParam("longitude", 0);
     
-    execute_controller("groups", "index");
+    $this->redirect("groups/index");
   }
 
   public function getEdit() {
@@ -31,5 +33,10 @@ class UsersController extends BaseController {
     UserHelper::updateUser($this->conn, $id, $phone);
 
     execute_controller("groups", "show");
+  }
+
+  public function getLogout() {
+    unset($_SESSION['my_id']);
+    $this->redirect("");
   }
 }

@@ -1,1 +1,7 @@
 .defaultTextActive { color: #a1a1a1; font-style: italic; }
+
+.status {
+  font-weight: bold;
+  color: #440000;
+  padding: 10px 0;
+}

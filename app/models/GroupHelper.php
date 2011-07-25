@@ -9,6 +9,13 @@ class GroupHelper {
     return $conn->lastInsertId();
   }
 
+  public static function didUserJoin($conn, $group_id, $user) {
+    $sql = "SELECT FROM group_user_assoc WHERE groupid = ? AND userid = ?";
+    $sth = $conn->prepare($sql);
+    $sth->execute(array($group_id, $user['userid']));
+    return $sth->fetch() !== false;
+  }
+
   public static function joinGroup($conn, $group_id, $user) {
     $sql = "INSERT INTO group_user_assoc(groupid, userid) values(?, ?)";
     $sth = $conn->prepare($sql);

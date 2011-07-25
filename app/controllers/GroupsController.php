@@ -28,31 +28,41 @@ class GroupsController extends BaseController {
     $user = $this->getUser();
     $long = $this->getParam('long');
     $lat = $this->getParam('lat');
+    if (empty($long) || empty($lat) || !is_numeric($long) || !is_numeric($lat)) {
+      $this->setStatus("Need a valid longitude and lattiude");
+      $this->redirect("groups/index");
+    }
 
     $id = GroupHelper::createGroup($this->conn, $user, $long, $lat);
     $_REQUEST['group_id'] = $id;
 
     execute_controller("groups","join");
+    $this->redirect("groups/join?group_id=" . $id);
   }
 
   public function getJoin() {
     $user = $this->getUser();
     $group_id = $this->getParam('group_id');
-    if (empty($group_id)) {
-      echo "bad stuff";
-      exit;
+    if (empty($group_id) || !is_numeric($group_id)) {
+      $this->setStatus("Need a valid group ID");
+      $this->redirect("groups/index");
     }
-    GroupHelper::joinGroup($this->conn, $group_id, $user);
-    execute_controller("groups","show");
+    if (!GroupHelper::didUserJoin($this->conn, $group_id, $user)) {
+      GroupHelper::joinGroup($this->conn, $group_id, $user);
+    }
+    $this->redirect("groups/show?group_id=" . $group_id);
   }
 
   public function getShow() {
     $group_id = $this->getParam('group_id');
-    if (empty($group_id)) {
-      echo "bad stuff";
-      exit;
+    if (empty($group_id) || !is_numeric($group_id)) {
+      $this->setStatus("Need a valid group ID");
+      $this->redirect("groups/index");
     }
     $group = GroupHelper::getGroup($this->conn, $group_id);
+    if ($group == null) {
+      error_404();
+    }
     $members = GroupHelper::getMembers($this->conn, $group_id);
     $data = array(
       "group" => $group,
@@ -61,10 +71,10 @@ class GroupsController extends BaseController {
     $this->renderView("groups/show", $data);
   }
 
-  public function getGetmembers() {
+  public function getGetMembers() {
     $group_id = $this->getParam('group_id');
-    if (empty($group_id)) {
-      echo "naughty stuff";
+    if (empty($group_id) || !is_numeric($group_id)) {
+      echo "Need valid Group ID";
       exit;
     }
     $members = GroupHelper::getMembers($this->conn, $group_id);

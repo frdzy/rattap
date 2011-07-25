@@ -1,15 +1,15 @@
-    <div data-role="page">
-      <div data-role="header">
-        <h1><?php echo $group['groupname'] ?></h1>
-      </div>
-      <div data-role="content">
-      <a href="/users/edit?group_id=<?php echo $group['groupid'] ?>" data-rel="dialog">Edit Phone Number</a>
-     <ul data-role="listview" data-inset="true" data-theme"c" data-divider-theme="b" id="groupMemberList"></ul>
-        <script type="text/javascript">
-          $(document).ready(function() {
-            window.setTimeout("getGroupMembers(<?php echo $group['groupid']; ?>)", 500);
-          })
-        </script>
-      <a rel="external" href="/groups/index">Back to Groups</a>
-      </div>
-    </div>
+<div id="groups-show" class="ui-page" data-role="page">
+  <div data-role="header">
+    <a href="/groups/index" rel="external" data-icon="grid">Show All</a>
+    <h1><?php echo $group['groupname'] ?></h1>
+  </div>
+  <div data-role="content">
+  <a href="/users/edit?group_id=<?php echo $group['groupid'] ?>" data-rel="dialog">Edit Your Phone Number</a>
+ <ul data-inset="true" data-theme"c" data-divider-theme="b" class="groupMemberList"></ul>
+    <script type="text/javascript">
+      $(function() {
+        groupsShowPage.groupId = <?php echo htmlspecialchars($group['groupid'])?>;
+      });
+    </script>
+  </div>
+</div>

@@ -9,8 +9,12 @@ abstract class BaseController {
   function preExecute() {
   }
 
-  function getParam($name) {
-    return $_REQUEST[$name];
+  function getParam($name, $default = null) {
+    if (isset($_REQUEST[$name])) {
+      return $_REQUEST[$name];
+    } else {
+      return $default;
+    }
   }
 
   function execute($action_name) {
@@ -36,6 +40,15 @@ abstract class BaseController {
       $this->user = UserHelper::getUser($this->conn, $id);
     }
     return $this->user;
+  }
+
+  function setStatus($status) {
+    $_SESSION['status'] = $status;
+  }
+
+  function redirect($url) {
+    header('Location: /' . $url);
+    exit;
   }
 
   function renderView($view_name, array $data = array()) {

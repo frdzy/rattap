@@ -18,6 +18,7 @@ class UserHelper {
     $sql = "SELECT * FROM userauth WHERE userid = ?";
     $sth = $conn->prepare($sql);
     $sth->execute(array($user_id));
-    return $sth->fetch();
+    $user = $sth->fetch();
+    return $user ? $user : null;
   }
 }
