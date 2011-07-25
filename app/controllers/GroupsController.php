@@ -10,15 +10,15 @@ class GroupsController extends BaseController {
   }
 
   public function getIndex() {
-    $long = $this->getParam('long');
-    $lat = $this->getParam('lat');
+    $long = 0.0 + $this->getParam('long', 0);
+    $lat = 0.0 + $this->getParam('lat', 0);
     $data = array('long' => $long, 'lat' => $lat);
     return $this->renderView("groups/index", $data);
   }
 
   public function getNearby() {
-    $long = $this->getParam('longitude');
-    $lat = $this->getParam('latitude');
+    $long = 0.0 + $this->getParam('longitude', 0);
+    $lat = 0.0 + $this->getParam('latitude', 0);
     $groups = GroupHelper::getNearbyGroups($this->conn, $long, $lat);
 
     echo json_encode($groups);
@@ -26,8 +26,8 @@ class GroupsController extends BaseController {
 
   public function getCreate() {
     $user = $this->getUser();
-    $long = $this->getParam('long');
-    $lat = $this->getParam('lat');
+    $long = 0.0 + $this->getParam('long', 0);
+    $lat = 0.0 + $this->getParam('lat', 0);
     if (empty($long) || empty($lat) || !is_numeric($long) || !is_numeric($lat)) {
       $this->setStatus("Need a valid longitude and lattiude");
       $this->redirect("groups/index");

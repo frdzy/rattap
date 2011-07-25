@@ -13,21 +13,29 @@ class UsersController extends BaseController {
       exit;
     }
 
+    if (strlen($name) > 30) {
+      $this->setStatus("Please enter a shorter name");
+      $this->redirect("");
+      exit;
+    }
+
+    // Pre-validation
+    $name = htmlspecialchars($name);
+
     $_SESSION['my_id'] = UserHelper::createUser($this->conn, $name, "");
-    $_SESSION['user_lat'] = $this->getParam("latitude", 0);
-    $_SESSION['user_long'] = $this->getParam("longitude", 0);
     
     $this->redirect("groups/index");
   }
 
   public function getEdit() {
-    $data = array("group_id" => $this->getParam('group_id'));
+    $data = array("group_id" => htmlspecialchars($this->getParam('group_id')));
     $this->renderView("users/edit", $data);
   }
 
   public function getUpdate() {
     $id = $_SESSION['my_id'];
     $phone = $this->getParam('phone');
+    $phone = htmlspecialchars($phone);
     $phone = str_replace("-", "", $phone);
 
     UserHelper::updateUser($this->conn, $id, $phone);

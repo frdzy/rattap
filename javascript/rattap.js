@@ -146,7 +146,10 @@ function showGroupMembers(data, textStatus, jqXHR) {
     if (phone == "") {
       phone = "Waiting...";
     }
-    $(".groupMemberList").append("<li>" + obj[member].username + "<span style='float: right'>" + phone + "</span></li>");
+    // Poor man's html escaping ;p
+    var name = $("<div/>").text(obj[member].username).html();
+    phone = $("<div/>").text(phone).html();
+    $(".groupMemberList").append("<li>" + name + "<span style='float: right'><a href='tel:" + phone + "'>" + phone + "</a></span></li>");
   }
   $(".groupMemberList").listview("refresh");
 }
