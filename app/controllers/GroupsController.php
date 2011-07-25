@@ -12,7 +12,6 @@ class GroupsController extends BaseController {
   public function getIndex() {
     $long = $this->getParam('long');
     $lat = $this->getParam('lat');
-    error_log('AYCARAMBA',$long,$lat);
     $data = array('long' => $long, 'lat' => $lat);
     return $this->renderView("groups/index", $data);
   }

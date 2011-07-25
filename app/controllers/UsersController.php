@@ -1,7 +1,4 @@
 <?php
-require_once('user/lib/config.php');
-require_once('helper.php');
-
 class UsersController extends BaseController {
   public function getIndex() {
     echo "Hi there! - users/index";

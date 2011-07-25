@@ -9,7 +9,10 @@ function load_file($file) {
     require_once(APP_ROOT . $file);
 }
 
+// Loader for common stuff
 load_file('utils/loader.php');
+
+// Load the router
 load_file('controllers/router.php');
 
 ?>
